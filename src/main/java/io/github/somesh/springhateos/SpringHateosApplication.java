@@ -27,7 +27,7 @@ public class SpringHateosApplication implements CommandLineRunner {
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			System.out.println(service.getSampleApi(sc.nextInt()));
-			System.out.println(consumer.getOauthResponse().getAccesToken());
+			System.out.println(consumer.getOauthResponse());
 		}
 	}
 }
