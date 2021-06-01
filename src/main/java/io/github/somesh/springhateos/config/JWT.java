@@ -22,5 +22,7 @@ public class JWT {
     @JsonProperty("scope")
     private String scope;
 
+    @JsonProperty("jti")
+    private String jti;
 
 }

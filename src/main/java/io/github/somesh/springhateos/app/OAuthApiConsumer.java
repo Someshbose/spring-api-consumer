@@ -16,15 +16,16 @@ import java.nio.charset.Charset;
 @Service
 public class OAuthApiConsumer {
 
-//    @Bean
-//    public
-
     @Autowired
     private RestTemplate restTemplate;
 
-    public JWT getOauthResponse(){
+    public String getOauthResponse(){
         ResponseEntity<JWT> jwt = restTemplate.exchange("http://localhost:8080/oauth/token?grant_type=client_credentials&scope=info", HttpMethod.POST,new HttpEntity(createHeaders("client", "secret")), JWT.class);
-        return jwt.getBody();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization",jwt.getBody().getTokenType()+" "+jwt.getBody().getAccesToken());
+        ResponseEntity<String> response = restTemplate.exchange("http://localhost:8081/hello",HttpMethod.GET,new HttpEntity<>(headers),String.class);
+        return response.getBody();
     }
 
     HttpHeaders createHeaders(String username, String password){
