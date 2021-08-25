@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ApiConsumer {
+
     @Bean
     public RestTemplate getRestTemplate(){
         return new RestTemplate();
@@ -14,7 +15,6 @@ public class ApiConsumer {
 
     @Autowired
     private RestTemplate restTemplate;
-
 
     public String getSampleApi(int id){
         String response = restTemplate.getForObject("http://numbersapi.com/{id}",String.class,id);
